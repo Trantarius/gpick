@@ -54,6 +54,7 @@ endif()
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 find_package(Ragel 6.9 REQUIRED)
+find_package(PipeWire REQUIRED)
 
 function(set_compile_options target)
 	if (MSVC)
@@ -198,9 +199,13 @@ target_link_libraries(gpick PRIVATE
 	${Lua_LIBRARIES}
 	${Expat_LIBRARIES}
 	Threads::Threads
+	portal
+	${PIPEWIRE_LIBRARIES}
 )
 target_include_directories(gpick PRIVATE
 	source
+	${SPA_INCLUDE_DIRS}
+	${PIPEWIRE_INCLUDE_DIRS}
 	${Boost_INCLUDE_DIRS}
 	${Lua_INCLUDE_DIRS}
 	${Expat_INCLUDE_DIRS}
